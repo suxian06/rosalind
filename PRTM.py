@@ -1,4 +1,4 @@
-### Calculate
+### Calculate Protein Mass
 #
 mass_table = """A   71.03711
 C   103.00919
