@@ -34,15 +34,12 @@ class Graph():
         neighbors = []
         neighbors.append(i)
 
-        while neighbors:
-            n = neighbors.pop(0)
-            if self.visited[n - 1] == False:
-                SCC.append(n)
-                self.visited[n - 1] = True
+        self.visited[i - 1] = True
+        SCC.append(i)
 
-                for i in self.Gt_adj[n]:
-                    if self.visited[i - 1] == False:
-                        neighbors.append(i)
+        for adj in self.Gt_adj[i]:
+            if not self.visited[adj - 1]:
+                self.DFS_GT(SCC,adj)
 
         return SCC
 
@@ -56,9 +53,10 @@ class Graph():
         while self.stack:
             val = []
             init = self.stack.pop(-1)
-            val = self.DFS_GT(val,init)
-            if val != []:
-                SCC.append(val)
+            if not self.visited[init - 1]:
+                val = self.DFS_GT(val,init)
+                if val != []:
+                    SCC.append(val)
 
         return SCC
 
